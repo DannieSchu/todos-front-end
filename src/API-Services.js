@@ -11,5 +11,5 @@ export async function updateTodo(todo, matchingTodo) {
 }
 
 export async function createTodo(newTodoObject) {
-    const data = await request.post(URL, {newTodoObject})
+    const data = await request.post(URL, newTodoObject)
 }

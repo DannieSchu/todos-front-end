@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AddTodo from './AddTodo.js'
 // import DeleteTodo from './DeleteTodo.js'
-import { getTodos, updateTodo, createTodo } from '../API-Services.js'
+import { getTodos, updateTodo, createTodo } from '../api-services.js'
 // import request from 'superagent'
 
 export default class TodoList extends Component {
@@ -39,6 +39,7 @@ export default class TodoList extends Component {
         const newTodos = [...this.state.todos, newTodo];
         this.setState({ todos: newTodos });
         await createTodo({ task: this.state.todoInput }); 
+
     }
 
     handleInput = (e) => {
@@ -58,18 +59,20 @@ export default class TodoList extends Component {
             </li>
         )
         return (
-            <div>
-                <ul>
-                    {mappedTodos}
-                </ul>
-                <div>
+            <main>
+                <div className="list-container">
+                    <ul>
+                        {mappedTodos}
+                    </ul>
+                </div>
+                <div className="add-container">
                     <AddTodo 
                         todoInput={this.state.todoInput}
                         handleInput={this.handleInput}
                         handleClick={this.handleClick}
                         />
                 </div>
-            </div>
+            </main>
         )
     }
 }
