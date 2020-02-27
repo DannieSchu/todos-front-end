@@ -1,38 +1,75 @@
 import React, { Component } from 'react'
-// import AddTask from './AddTask.js'
-// import DeleteTask from './DeleteTask.js'
-import { getTodos, updateTodo} from '../API-Services.js'
+import AddTodo from './AddTodo.js'
+// import DeleteTodo from './DeleteTodo.js'
+import { getTodos, updateTodo, createTodo } from '../API-Services.js'
+// import request from 'superagent'
 
 export default class TodoList extends Component {
     // initialize state of todos
     state = { todos: [] }
-    
+
     // get todos
-    componentDidMount = async() => {
-        const todosData = getTodos();
+    componentDidMount = async () => {
+        const todosData = await getTodos();
         this.setState({ todos: todosData.body })
     }
 
     // toggle on/off "complete" property
-    handleToggle = async (todo) => { 
-            const newTodos = this.state.todos.slice();
-            const matchingTodo = newTodos.find(thisTodo => todo.id === thisTodo.id);
-            matchingTodo.complete = !todo.complete;
-            this.setState({ todos: newTodos });    
-            updateTodo(todo, matchingTodo);   
+    handleToggle = async (todo) => {
+        // create new array
+        const newTodos = this.state.todos.slice();
+        // find matching todo by id
+        const matchingTodo = newTodos.find(thisTodo => todo.id === thisTodo.id);
+        // toggle complete property
+        matchingTodo.complete = !todo.complete;
+        // set state
+        this.setState({ todos: newTodos });
+        // update todo in database    
+        await updateTodo(todo, matchingTodo);
+    }
+
+    handleClick = async() => {
+        // create an object for the new todo
+        const newTodo = {
+            id: Math.random(),
+            task: this.state.todoInput,
+            complete: false
+        }
+        // create a new array of todos with the new todo 
+        const newTodos = [...this.state.todos, newTodo];
+        this.setState({ todos: newTodos });
+        await createTodo({ task: this.state.todoInput }); 
+    }
+
+    handleInput = (e) => {
+        this.setState({ todoInput: e.target.value })
     }
 
     // render all todos
     render() {
+        const { todos } = this.state;
+        const mappedTodos = todos.map(todo =>
+            <li 
+                style={{textDecoration: todo.complete ? 'line-through' : 'none'}} 
+                onClick={() => this.handleToggle(todo)} 
+                key={todo.id}
+                >
+                {todo.task}
+            </li>
+        )
         return (
-            <ul>
-                { 
-                this.state.todos.map(todo =>
-                    <li onClick={this.handleToggle(todo)} key ={todo.id}>{todo.task}
-                    </li>
-                )
-                }
-            </ul>
+            <div>
+                <ul>
+                    {mappedTodos}
+                </ul>
+                <div>
+                    <AddTodo 
+                        todoInput={this.state.todoInput}
+                        handleInput={this.handleInput}
+                        handleClick={this.handleClick}
+                        />
+                </div>
+            </div>
         )
     }
 }
