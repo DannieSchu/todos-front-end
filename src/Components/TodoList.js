@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AddTodo from './AddTodo.js'
 // import DeleteTodo from './DeleteTodo.js'
 import { getTodos, updateTodo, createTodo } from '../api-services.js'
-import request from 'superagent'
+// import request from 'superagent'
 
 export default class TodoList extends Component {
     // initialize state of todos
@@ -11,12 +11,14 @@ export default class TodoList extends Component {
     // get todos
     componentDidMount = async () => {
         const user = JSON.parse(localStorage.getItem('user'));
-        const todosData = await request.get('https://lit-reaches-94796.herokuapp.com/api/todos').set('Authorization', user.token);
+        const todosData = await getTodos(user.token);
         this.setState({ todos: todosData.body });
     }
 
     // toggle on/off "complete" property
     handleToggle = async (todo) => {
+        // get user from local storage and parse
+        const user = JSON.parse(localStorage.getItem('user'));
         // create new array
         const newTodos = this.state.todos.slice();
         // find matching todo by id
@@ -26,7 +28,7 @@ export default class TodoList extends Component {
         // set state
         this.setState({ todos: newTodos });
         // update todo in database    
-        await updateTodo(todo, matchingTodo);
+        await updateTodo(todo, matchingTodo, user.token);
     }
 
     handleClick = async() => {
@@ -47,16 +49,14 @@ export default class TodoList extends Component {
 
     }
 
-    handleInput = (e) => {
-        this.setState({ todoInput: e.target.value })
-    }
-
     // render all todos
     render() {
         const { todos } = this.state;
         const mappedTodos = todos.map(todo =>
             <li 
-                style={{textDecoration: todo.complete ? 'line-through' : 'none'}} 
+                style={
+                    {textDecoration: todo.complete ? 'line-through' : 'none'}
+                } 
                 onClick={() => this.handleToggle(todo)} 
                 key={todo.id}
                 >
@@ -65,15 +65,21 @@ export default class TodoList extends Component {
         )
         return (
             <main>
-                <div className="list-container">
-                    <ul>
-                        {mappedTodos}
-                    </ul>
-                </div>
+                {todos.length > 0 &&
+                    <div 
+                        style={{
+                            display: this.state.todos ? 'flex' : 'none'}
+                        }
+                        className="list-container">
+                        <ul>
+                            {mappedTodos}
+                        </ul>
+                    </div>
+                }
                 <div className="add-container">
                     <AddTodo 
                         todoInput={this.state.todoInput}
-                        handleInput={this.handleInput}
+                        handleInput={(e) => this.setState({ todoInput: e.target.value})}
                         handleClick={this.handleClick}
                         />
                 </div>

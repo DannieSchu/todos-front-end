@@ -4,29 +4,30 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 export default class SignIn extends Component {
     state = { 
-        emailSignIn: '',
-        passwordSignIn: ''
+        email: '',
+        password: ''
     }
     handleSignIn = async (e) => {
         e.preventDefault();
         const URL = `https://lit-reaches-94796.herokuapp.com/api/auth/signin`;
         const user = await request.post(URL, {
-            email: this.state.emailSignIn,
-            password: this.state.passwordSignIn
+            email: this.state.email,
+            password: this.state.password
         });
         this.props.setUser(user);
         localStorage.setItem('user', JSON.stringify(user.body));
-        <Redirect to='/' />
+        // <Redirect to='/' />
+        this.props.history.push('/');
     }
     render() {
         return (
             <div>
                 <form onSubmit={this.handleSignIn}>
                     <label>Email:
-                        <input onChange={(e) => this.setState({ emailSignIn: e.target.value })} required/>
+                        <input onChange={(e) => this.setState({ email: e.target.value })} required/>
                     </label>
                     <label>Password:
-                        <input onChange={(e) => this.setState({passwordSignIn: e.target.value})} required/>
+                        <input onChange={(e) => this.setState({password: e.target.value})} required/>
                     </label>
                     <button>Sign In</button>
                 </form>

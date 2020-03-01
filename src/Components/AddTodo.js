@@ -5,7 +5,7 @@ export default class AddTodo extends Component {
         return (
             <div className="add">
                 <input 
-                    onChange={this.props.handleInput} value={this.props.todoInput} placeholder="Create a new todo item..." 
+                    onChange={this.props.handleInput} placeholder="Create a new todo item..." 
                     />
                 <button onClick={this.props.handleClick}>Add</button>
             </div>
