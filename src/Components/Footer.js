@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
-import { Link, BrowserRouter as Router } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default class Footer extends Component {
     render() {
         return (
             <footer>
-                 <Router>
-                    <nav className = "links">
-                        <Link to="/signup">Sign Up</Link>
-                        <Link to="/signin">Sign In</Link>
-                    </nav>
-                </Router>               
+                 <nav>
+                    <NavLink to="/signup">Sign Up</NavLink>
+                    <NavLink to="/signin">Sign In</NavLink>
+                    <NavLink exact to="/">To Do List</NavLink>
+                </nav>               
             </footer>
         )
     }

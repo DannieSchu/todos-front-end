@@ -22,10 +22,10 @@ export default class SignUp extends Component {
         return (
             <form onSubmit={this.handleSignUp}>
                 <label>Email: 
-                    <input onChange={(e) => this.setState({ emailSignUp: e.target.value })} placeholder="Enter your email address" Required />
+                    <input onChange={(e) => this.setState({ emailSignUp: e.target.value })} required />
                 </label>
                 <label>Password: 
-                    <input onChange={(e) => this.setState({ passwordSignUp: e.target.value })} placeholder="Enter your password" Required />
+                    <input onChange={(e) => this.setState({ passwordSignUp: e.target.value })} required />
                 </label>
                 <button>Sign Up</button>
             </form>

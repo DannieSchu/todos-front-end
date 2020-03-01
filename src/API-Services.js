@@ -10,7 +10,7 @@ export async function updateTodo(todo, matchingTodo) {
     const data = await request.put(`${URL}/${todo.id}`, matchingTodo);
 }
 
-export async function createTodo(newTodoObject) {
-    const data = await request.post(URL, newTodoObject)
+export async function createTodo(newTodoObject, token) {
+    const data = await request.post(URL, newTodoObject).set('Authorization', token)
 }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AddTodo from './AddTodo.js'
 // import DeleteTodo from './DeleteTodo.js'
 import { getTodos, updateTodo, createTodo } from '../api-services.js'
-// import request from 'superagent'
+import request from 'superagent'
 
 export default class TodoList extends Component {
     // initialize state of todos
@@ -10,8 +10,9 @@ export default class TodoList extends Component {
 
     // get todos
     componentDidMount = async () => {
-        const todosData = await getTodos();
-        this.setState({ todos: todosData.body })
+        const user = JSON.parse(localStorage.getItem('user'));
+        const todosData = await request.get('https://lit-reaches-94796.herokuapp.com/api/todos').set('Authorization', user.token);
+        this.setState({ todos: todosData.body });
     }
 
     // toggle on/off "complete" property
@@ -35,10 +36,14 @@ export default class TodoList extends Component {
             task: this.state.todoInput,
             complete: false
         }
-        // create a new array of todos with the new todo 
+        // get user from local storage and parse
+        const user = JSON.parse(localStorage.getItem('user'));
+        // append new todo to current todos list and store in new array
         const newTodos = [...this.state.todos, newTodo];
+        // set this array as state
         this.setState({ todos: newTodos });
-        await createTodo({ task: this.state.todoInput }); 
+        
+        await createTodo({ task: this.state.todoInput }, user.token); 
 
     }
 

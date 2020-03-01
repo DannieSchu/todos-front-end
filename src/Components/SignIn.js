@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import request from 'superagent';
+import { BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
+
+
 
 export default class SignIn extends Component {
     state = { 
@@ -20,18 +23,21 @@ export default class SignIn extends Component {
     render() {
         return (
             <div>
-                <div>
-                    <button onClick={this.props.history.push('/')}>Sign Up</button>
-                </div>
                 <form onSubmit={this.handleSignIn}>
                     <label>Email:
-                        <input onChange={(e) => this.setState({ emailSignIn: e.target.value })} placeholder="Enter your email address" Required/>
+                        <input onChange={(e) => this.setState({ emailSignIn: e.target.value })} required/>
                     </label>
                     <label>Password:
-                        <input onChange={(e) => this.setState({passwordSignIn: e.target.value})} placeholder="Enter your password" Required/>
+                        <input onChange={(e) => this.setState({passwordSignIn: e.target.value})} required/>
                     </label>
                     <button>Sign In</button>
                 </form>
+                <Router>
+                    <div>
+                        <span>No account? </span>
+                        <NavLink to="/signup"> Sign up!</NavLink>
+                    </div>
+                </Router>
             </div>
         )
     }
