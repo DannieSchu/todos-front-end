@@ -8,12 +8,12 @@ export default class SignUp extends Component {
 }
     handleSignUp = async(e) => {
         e.preventDefault();
-        const URL = `https://lit-reaches-94796.herokuapp.com/api/auth/signup`
+        const URL = `https://lit-reaches-94796.herokuapp.com/api/auth/signup`;
         const user = await request.post(URL, {
             email: this.state.emailSignUp,
             password: this.state.passwordSignUp
         });
-        this.props.setUser(user);
+        // this.props.setUser(user);
         localStorage.setItem('user', JSON.stringify(user.body));
         this.props.history.push('/');
     }
@@ -22,10 +22,10 @@ export default class SignUp extends Component {
         return (
             <form onSubmit={this.handleSignUp}>
                 <label>Email: 
-                    <input onChange={(e) => this.setState({ emailSignUp: e.target.value })} placeholder="Your email address" />
+                    <input onChange={(e) => this.setState({ emailSignUp: e.target.value })} placeholder="Enter your email address" Required />
                 </label>
                 <label>Password: 
-                    <input onChange={(e) => this.setState({ passwordSignUp: e.target.value })} placeholder="Your email address" />
+                    <input onChange={(e) => this.setState({ passwordSignUp: e.target.value })} placeholder="Enter your password" Required />
                 </label>
                 <button>Sign Up</button>
             </form>

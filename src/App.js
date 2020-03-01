@@ -13,11 +13,12 @@ export default class App extends Component {
         <Header />
         <Router>
           <Switch>
-            <Route path = "/signup" component = {SignUp} />
             <Route path = "/signin" component = {SignIn} />
+            <Route path = "/signup" component = {SignUp} />
             <Route path = "/" component = {TodoList} />
           </Switch>
         </Router>
+        {/* <Footer /> */}
       </div>
     )
   }
