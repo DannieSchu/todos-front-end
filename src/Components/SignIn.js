@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import request from 'superagent';
-import { BrowserRouter as Router, Switch, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 
 
@@ -18,7 +18,7 @@ export default class SignIn extends Component {
         });
         // this.props.setUser(user);
         localStorage.setItem('user', JSON.stringify(user.body));
-        this.props.history.push('/');
+        <Redirect to='/' />
     }
     render() {
         return (
@@ -35,7 +35,7 @@ export default class SignIn extends Component {
                 <Router>
                     <div>
                         <span>No account? </span>
-                        <NavLink to="/signup"> Sign up!</NavLink>
+                        <Link to="/signup"> Sign up!</Link>
                     </div>
                 </Router>
             </div>

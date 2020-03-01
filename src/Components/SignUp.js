@@ -13,9 +13,10 @@ export default class SignUp extends Component {
             email: this.state.emailSignUp,
             password: this.state.passwordSignUp
         });
-        // this.props.setUser(user);
+        this.props.setUser(user);
         localStorage.setItem('user', JSON.stringify(user.body));
-        this.props.history.push('/');
+        <Redirect to='/' />
+
     }
 
     render() {
