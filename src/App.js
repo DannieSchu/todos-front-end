@@ -4,6 +4,7 @@ import Header from './Components/Header';
 import TodoList from './Components/TodoList';
 import SignUp from './Components/SignUp';
 import SignIn from './Components/SignIn';
+import Footer from './Components/Footer';
 import './App.css';
 
 export default class App extends Component {
@@ -18,7 +19,7 @@ export default class App extends Component {
             <Route path = "/" component = {TodoList} />
           </Switch>
         </Router>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     )
   }
