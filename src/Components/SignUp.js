@@ -30,15 +30,17 @@ export default class SignUp extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSignUp}>
-                <label>Email: 
-                    <input onChange={(e) => this.setState({ email: e.target.value })} required />
-                </label>
-                <label>Password: 
-                    <input onChange={(e) => this.setState({ password: e.target.value })} required />
-                </label>
-                <button>Sign Up</button>
-            </form>
+            <div className="form-container">
+                <form onSubmit={this.handleSignUp}>
+                    <label>Email: 
+                        <input onChange={(e) => this.setState({ email: e.target.value })} required />
+                    </label>
+                    <label>Password: 
+                        <input onChange={(e) => this.setState({ password: e.target.value })} required />
+                    </label>
+                    <button>Sign Up</button>
+                </form>
+            </div>
         )
     }
 }

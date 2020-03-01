@@ -71,9 +71,9 @@ export default class TodoList extends Component {
                             display: this.state.todos ? 'flex' : 'none'}
                         }
                         className="list-container">
-                        <ul>
+                        <ol>
                             {mappedTodos}
-                        </ul>
+                        </ol>
                     </div>
                 }
                 <div className="add-container">

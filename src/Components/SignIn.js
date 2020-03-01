@@ -21,7 +21,7 @@ export default class SignIn extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="form-container">
                 <form onSubmit={this.handleSignIn}>
                     <label>Email:
                         <input onChange={(e) => this.setState({ email: e.target.value })} required/>
@@ -31,12 +31,11 @@ export default class SignIn extends Component {
                     </label>
                     <button>Sign In</button>
                 </form>
-                <Router>
-                    <div>
-                        <span>No account? </span>
-                        <Link to="/signup"> Sign up!</Link>
-                    </div>
-                </Router>
+                <div>
+                    <Router>
+                        <p>No account? <Link exact to="/signup"> Sign up!</Link></p>
+                    </Router>
+                </div>
             </div>
         )
     }
