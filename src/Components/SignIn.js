@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import request from 'superagent';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
-
-
 export default class SignIn extends Component {
     state = { 
         emailSignIn: '',
@@ -16,7 +14,7 @@ export default class SignIn extends Component {
             email: this.state.emailSignIn,
             password: this.state.passwordSignIn
         });
-        // this.props.setUser(user);
+        this.props.setUser(user);
         localStorage.setItem('user', JSON.stringify(user.body));
         <Redirect to='/' />
     }

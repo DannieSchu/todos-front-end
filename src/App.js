@@ -9,10 +9,10 @@ import Footer from './Components/Footer';
 import './App.css';
 
 export default class App extends Component {
-  // state = { user: null };
-  // setUser = (user) => {
-  //   this.setState({ user: user.body })
-  // }
+  state = { user: null };
+  setUser = (user) => {
+    this.setState({ user: user.body })
+  }
 
   render() {  
     return (
@@ -20,12 +20,12 @@ export default class App extends Component {
         <Header />
         <Router>
           <Switch>
-            <Route path="/signin" component={SignIn} />
-            {/* <Route path = "/signin" render={(props) => <SignIn {...props} setUser={ this.setUser } user={this.state.user }/>} /> */}
-            <Route path="/signup" component={SignUp} />
-            {/* <Route path = "/signup" render={(props) => <SignUp {...props} setUser={ this.setUser } user={this.state.user }/>} /> */}
-            {/* <Route path = "/" component={TodoList} user={this.state.user} /> */}
-            <Route path="/" component={TodoList} />
+            {/* <Route path="/signin" component={SignIn} /> */}
+            <Route path = "/signin" render={(props) => <SignIn {...props} setUser={ this.setUser } user={this.state.user }/>} />
+            {/* <Route path="/signup" component={SignUp} /> */}
+            <Route path = "/signup" render={(props) => <SignUp {...props} setUser={ this.setUser } user={this.state.user }/>} />
+            <Route path = "/" component={TodoList} user={this.state.user} />
+            {/* <Route path="/" component={TodoList} /> */}
             {/* <PrivateRoute exact path = "/" component = {TodoList} user={this.state.user} /> */}
           </Switch>
           <Footer />
