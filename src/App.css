@@ -59,12 +59,12 @@ li {
 
 .add > input {
   width: 300px;
-  height: 30px;
-  padding: 10px;
+  /* height: 30px; */
+  padding: 5px 20px;
   background-color: rgb(218, 162, 78);
   border-radius: 5px;
   color: white;
-  font-size: 16px;
+  font-size: 18px;
   font-family: 'Caveat';
 }
 
@@ -75,11 +75,11 @@ button, li {
 button {
   background-color: rgb(192, 103, 19);
   color: white;
-  text-transform: uppercase;
   border-radius: 5px;
   padding: 8px 10px;
   font-weight: bold;
   margin: 10px;
+  font-size: 15px;
   box-shadow: rgb(78, 78, 78);
 }
 
