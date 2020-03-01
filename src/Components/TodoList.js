@@ -64,19 +64,18 @@ export default class TodoList extends Component {
             </li>
         )
         return (
-            <main>
+            <main className="flex-column">
                 {todos.length > 0 &&
-                    <div 
+                    <div className="flex-column"
                         style={{
                             display: this.state.todos ? 'flex' : 'none'}
-                        }
-                        className="list-container">
+                        }>
                         <ol>
                             {mappedTodos}
                         </ol>
                     </div>
                 }
-                <div className="add-container">
+                <div className="flex-column">
                     <AddTodo 
                         todoInput={this.state.todoInput}
                         handleInput={(e) => this.setState({ todoInput: e.target.value})}

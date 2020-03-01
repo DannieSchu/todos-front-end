@@ -30,8 +30,8 @@ export default class SignUp extends Component {
 
     render() {
         return (
-            <div className="form-container">
-                <form onSubmit={this.handleSignUp}>
+            <div className="flex-column">
+                <form className="flex-row" onSubmit={this.handleSignUp}>
                     <label>Email: 
                         <input onChange={(e) => this.setState({ email: e.target.value })} required />
                     </label>

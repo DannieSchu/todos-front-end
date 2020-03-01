@@ -21,8 +21,8 @@ export default class SignIn extends Component {
     }
     render() {
         return (
-            <div className="form-container">
-                <form onSubmit={this.handleSignIn}>
+            <div className="flex-column">
+                <form className="flex-row" onSubmit={this.handleSignIn}>
                     <label>Email:
                         <input onChange={(e) => this.setState({ email: e.target.value })} required/>
                     </label>
