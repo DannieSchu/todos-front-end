@@ -9,15 +9,12 @@ export default class TodoList extends Component {
 
     // get todos
     componentDidMount = async () => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        const todosData = await getTodos(user.token);
+        const todosData = await getTodos();
         this.setState({ todos: todosData.body });
     }
 
     // toggle on/off "complete" property
     handleToggle = async (todo) => {
-        // get user from local storage and parse
-        const user = JSON.parse(localStorage.getItem('user'));
         // create new array
         const newTodos = this.state.todos.slice();
         // find matching todo by id
@@ -27,7 +24,7 @@ export default class TodoList extends Component {
         // set state
         this.setState({ todos: newTodos });
         // update todo in database    
-        await updateTodo(todo, matchingTodo, user.token);
+        await updateTodo(todo, matchingTodo);
     }
 
     handleDelete = async(e) => {
@@ -58,14 +55,12 @@ export default class TodoList extends Component {
             task: this.state.todoInput,
             complete: false
         }
-        // get user from local storage and parse
-        const user = JSON.parse(localStorage.getItem('user'));
         // append new todo to current todos list and store in new array
         const newTodos = [...this.state.todos, newTodo];
         // set this array as state
         this.setState({ todos: newTodos });
         
-        await createTodo({ task: this.state.todoInput }, user.token); 
+        await createTodo({ task: this.state.todoInput }); 
     }
 
     // render all todos
