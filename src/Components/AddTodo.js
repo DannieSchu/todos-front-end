@@ -5,7 +5,7 @@ export default class AddTodo extends Component {
         return (
             <div className="flex-row">
                 <input 
-                    onChange={this.props.handleInput} placeholder="Create a new todo item..." 
+                    onChange={this.props.handleInput} placeholder="Create a new task..." 
                     />
                 <button onClick={this.props.handleClick}>Add</button>
             </div>

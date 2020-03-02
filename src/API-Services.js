@@ -14,6 +14,11 @@ export async function createTodo(newTodoObject, token) {
     const data = await request.post(`${URL}/todos`, newTodoObject).set('Authorization', token);
 }
 
+export async function deleteTodo(todo) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const data = await request.delete(`${URL}/todos/${todo.id}`).set('Authorization', user.token);
+}
+
 export async function logInUser(param, userEmail, userPassword) {
     await request.post(`${URL}/auth/${param}`, {
         email: userEmail,

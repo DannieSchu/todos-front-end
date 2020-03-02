@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import AddTodo from './AddTodo.js'
-// import DeleteTodo from './DeleteTodo.js'
-import { getTodos, updateTodo, createTodo } from '../api-services.js'
-// import request from 'superagent'
+import DeleteTodo from './DeleteTodo.js'
+import { getTodos, updateTodo, createTodo, deleteTodo } from '../api-services.js'
 
 export default class TodoList extends Component {
     // initialize state of todos
@@ -31,6 +30,27 @@ export default class TodoList extends Component {
         await updateTodo(todo, matchingTodo, user.token);
     }
 
+    handleDelete = async(e) => {
+        const deletedTodo = e.target.id;
+        const newTodos = this.state.todos.slice();
+        newTodos.splice(this.state.todos.findIndex(deletedTodo), 1);
+        this.setState({
+            todos: newTodos
+        })
+        await deleteTodo(deletedTodo);
+        
+        // // create new array to mutate
+        // const newTodos = this.state.todos.slice();
+        // // find index of todo in array
+        // const index = newTodos.indexOf(todo);
+        // // mutate array
+        // newTodos.splice(index, 1);
+        // // update state
+        // this.setState({ todos: newTodos })
+        // // delete todo associated with user in api
+        // await deleteTodo(todo, user.token);
+    }
+
     handleClick = async() => {
         // create an object for the new todo
         const newTodo = {
@@ -46,7 +66,6 @@ export default class TodoList extends Component {
         this.setState({ todos: newTodos });
         
         await createTodo({ task: this.state.todoInput }, user.token); 
-
     }
 
     // render all todos
@@ -61,6 +80,8 @@ export default class TodoList extends Component {
                 key={todo.id}
                 >
                 {todo.task}
+                <button onClick={() => this.handleDelete}>Delete</button>
+                {/* <button onClick={() => this.handleDelete(todo)}>Delete</button> */}
             </li>
         )
         return (
